@@ -56,17 +56,13 @@ if Var.LOAD_MYBOT == "True":
         "{}\n\n"
         "For immediate help, PM me via {}"
         "\nPlease choose why you are here, from the available options\n\n".format(
-            DEFAULTUSER, myid, MESAG, botname
-        )
-    )
+            DEFAULTUSER, myid, MESAG, botname))
 elif Var.LOAD_MYBOT == "False":
     USER_BOT_NO_WARN = (
         "**PM Security of [{}](tg://user?id={})**\n\n"
         "{}\n"
         "\nPlease choose why you are here, from the available options\n".format(
-            DEFAULTUSER, myid, MESAG
-        )
-    )
+            DEFAULTUSER, myid, MESAG))
 
 CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
 HELP_ROWS = int(os.environ.get("HELP_ROWS", 5))
@@ -84,7 +80,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
                 "© hydra Help",
-                text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
+                text="{}\nCurrently Loaded Plugins: {}".format(
+                    query,
+                    len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
             )
@@ -167,8 +165,10 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     )
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:  # pylint:disable=E0602
-            current_page_number = int(event.data_match.group(1).decode("UTF-8"))
-            buttons = paginate_help(current_page_number + 1, CMD_LIST, "helpme")
+            current_page_number = int(
+                event.data_match.group(1).decode("UTF-8"))
+            buttons = paginate_help(
+                current_page_number + 1, CMD_LIST, "helpme")
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
@@ -291,7 +291,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     )
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:  # pylint:disable=E0602
-            current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+            current_page_number = int(
+                event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(
                 current_page_number - 1, CMD_LIST, "helpme"  # pylint:disable=E0602
             )
@@ -324,8 +325,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 pass
             if help_string == "":
                 reply_pop_up_alert = "{} has no detailed info.\nUse .help {}".format(
-                    plugin_name, plugin_name
-                )
+                    plugin_name, plugin_name)
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
@@ -369,7 +369,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
         pairs = pairs[
-            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
+            modulo_page * number_of_rows: number_of_rows * (modulo_page + 1)
         ] + [
             (
                 custom.Button.inline(

@@ -58,9 +58,8 @@ auth_url = r["auth_url"]
 # --=============================================--#
 
 
-@hydra.on(
-    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
-)
+@hydra.on(events.NewMessage(incoming=True,
+                            func=lambda e: bool(e.mentioned or e.is_private)))
 async def on_afk(event):
     if event.fwd_from:
         return
@@ -98,16 +97,13 @@ async def on_afk(event):
         msg = None
         if reason is not None and tele == "True":
             message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** : {}".format(
-                CUSTOM_AFK, endtime, reason
-            )
+                CUSTOM_AFK, endtime, reason)
         elif tele == "False":
             message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** - {}".format(
-                CUSTOM_AFK, endtime, reason
-            )
+                CUSTOM_AFK, endtime, reason)
         else:
             message_to_reply = "**AFK**\n{}\n\n**Last active** {} **ago.**".format(
-                CUSTOM_AFK, endtime
-            )
+                CUSTOM_AFK, endtime)
         if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
             msg = await event.reply(message_to_reply)
         if event.chat_id in last_afk_message:
