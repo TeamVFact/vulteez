@@ -2,8 +2,8 @@ FROM vckyouubitch/geez:master
 
 RUN git clone -b master https://github.com/vckyou/vulteez /home/vulteez/ \ 
     && chmod 777 /home/vulteez \
-    && mkdir /root/vulteez/bin/
+    && mkdir /home/vulteez/bin/
 
-WORKDIR /root/vulteez/
+WORKDIR /home/vulteez/
 
 CMD ["bash","./resources/startup.sh"]
